@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="grad">
+	<center>
+		<h1>
+			<a href="http://localhost:8000">{{ variable }}</a>
+		</h1>
+	</center>
+</div>
+
+Main page
+<br>
+
+<a href="http://localhost:8000/play/">
+<button class="button button1">Play</button>
+</a>
+
+<a href="http://localhost:8000/decks/">
+<button class="button button1">Decks</button>
+</a>
+
+<a href="http://localhost:8000/profile/">
+<button class="button button1">Profile</button>
+</a>
+
+<br>
+
+<br>
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+</div>
+
+<div id="London" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+<button class="open-button" onclick="openForm()">Chat</button>
+
+<!--
+<div class="chat-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+    <h1>Chat</h1>
+
+    <label for="msg"><b>Message</b></label>
+    <textarea placeholder="Type message.." name="msg" required></textarea>
+
+    <button type="submit" class="btn">Send</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+-->
+
+{% endblock %}
+{% block scripts %}
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- development version, includes helpful console warnings -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="{% static "js/myvue.js" %}"></script>
+	<script src="{% static "js/page_open.js" %}"></script>
+	<script src="{% static "js/form_open.js" %}"></script>
+{% endblock %}

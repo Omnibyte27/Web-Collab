@@ -44,8 +44,7 @@ var app4 = new Vue({
       cancelAutoUpdate: function() { clearInterval(this.timer) }
     },
     beforeDestroy() {
-      //clearInterval(this.timer)
-	  this.cancelAutoUpdate();
+      clearInterval(this.timer)
     }
   
 })

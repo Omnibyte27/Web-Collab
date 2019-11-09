@@ -1,15 +1,11 @@
-#from django.shortcuts import render
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 
 from . import models
 from . import forms
 
 # Create your views here.
-def index(request, page=0):
+def index(request):
     if request.method=="POST":
         form_instance = forms.InputForm(request.POST)
         if form_instance.is_valid():
@@ -24,19 +20,13 @@ def index(request, page=0):
         form_instance = forms.InputForm()
     
     value = models.Input.objects.all()
-    valuelist = range(10*page+10)
     context={
         "variable":"CINS465 Hello World",
         "title":"CINS465 Hello World",
-        "form":form_instance,
-        #"some_list":value[page*5:(page*5+5)],
-        "some_list":value,
-        "value_list":valuelist[page*10:(page*10+10)]
+        "form":form_instance
     }
     return render(request, "index.html", context=context)
-
-@csrf_exempt
-@login_required(login_url='/login/')    
+    
 def inputs_view(request):
     if request.method == "GET":
         #REST API call that gets all data
@@ -51,7 +41,39 @@ def inputs_view(request):
         return JsonResponse(input_list)
     else:
         return HttpResponse("Unsupported HTTP Method")
-
-def logout_view(request):
-    logout(request)
-    return redirect("/login/")
+ 
+def main_page(request):
+    #value = models.Input.objects.all()
+    context={
+        "variable":"Three by Three",
+        "title":"3x3"
+        #"form":form_instance
+    }
+    return render(request, "main_page.html", context=context)
+    
+def profile(request):
+    #value = models.Input.objects.all()
+    context={
+        "variable":"Three by Three",
+        "title":"3x3"
+        #"form":form_instance
+    }
+    return render(request, "profile.html", context=context)
+    
+def decks(request):
+    #value = models.Input.objects.all()
+    context={
+        "variable":"Three by Three",
+        "title":"3x3"
+        #"form":form_instance
+    }
+    return render(request, "decks.html", context=context)
+    
+def play(request):
+    #value = models.Input.objects.all()
+    context={
+        "variable":"Three by Three",
+        "title":"3x3"
+        #"form":form_instance
+    }
+    return render(request, "play.html", context=context)

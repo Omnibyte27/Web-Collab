@@ -16,30 +16,6 @@
 	</center>
 </div>
 
-{% if user.is_authenticated %}
-<a href="/logout/" class="button">Logout</a>
-{% endif %}
-
-<div id="app-4">
-<span v-if="seen">
-		<ul>
-			{% for inp in some_list %}
-				<li>{{ inp }}</li>
-			{% endfor %}
-		</ul>
-</span> 
-<span v-if="unseen">
-		<ul>
-			<li v-for="inp in inputs">
-				{% verbatim %}
-				{{ inp.input }}
-				{% endverbatim %}
-			</li>
-		</ul>
-</div>
-</span> <!-- Goes after div-->
-
-{% if user.is_authenticated %}
 <form action="/" method="post">
 	{% csrf_token %}
 	{{ form }}
@@ -93,7 +69,15 @@ Loop through and render in code
 	{{message}}
 	{% endverbatim %}
 </div>
-{% endif %}
+<div id="app-4">
+	<ol>
+		<li v-for="inp in inputs">
+			{% verbatim %}
+			{{ inp.input }}
+			{% endverbatim %}
+		</li>
+	</ol>
+</div>
 {% endblock %}
 {% block scripts %}
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
