@@ -10,6 +10,11 @@
 	</center>
 </div>
 
+{% csrf_token %}
+{{ form2 }}
+		
+
+<div class="class1">
 Play
 <br>
 
@@ -20,6 +25,46 @@ Play
 <a href="http://localhost:8000/profile/">
 <button class="button button1">Profile</button>
 </a>
+
+
+</div>
+
+<div class="class2">
+- Chat box goes here
+<br>
+
+{% if user.is_authenticated %}
+<button class="open-button" onclick="openForm()">Chat</button>
+
+- Needs to go to a different model anyways (user to user); sending a message isn't rendering
+<br>
+- There are also many places than need to be authenticated, but that can be done
+after functionality is in place.
+<div class="chat-popup" id="myForm">
+	<form action="/play/" method="post" class="form-container">
+		<h4>Chat</h4>
+		
+		{% csrf_token %}
+		{{ form2 }}
+		<input type="submit" class="success button" value="Submit">
+		<button type="button" class="alert button" onclick="closeForm()">Close</button>
+	</form>
+</div>
+
+<div id="app-4">
+	<ol>
+		<ul v-for="inp in inputs">
+			{% verbatim %}
+			{{ inp.input }} - {{ inp.author }}
+			{% endverbatim %}
+		</ul>
+	</ol>
+</div>
+{% endif %}
+
+</div>
+
+
 
 {% endblock %}
 {% block scripts %}

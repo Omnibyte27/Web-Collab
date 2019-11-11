@@ -74,6 +74,9 @@ body {
 	background-position: right top;
 	margin-right: 200px;
 	background-attachment: fixed;
+	
+	width: 100%;
+	float:left;
 }
 
 .p_p {
@@ -166,6 +169,10 @@ body {
   max-width: 300px;
   padding: 10px;
   background-color: white;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
 }
 
 /* Full-width textarea */
@@ -205,4 +212,18 @@ body {
 /* Add some hover effects to buttons */
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
+}
+
+/*Divides the page 75%/25% to accommodate chat*/
+
+.class1 {
+	width: 75%;
+	float: left;
+	height: 100%;
+}
+
+.class2 {
+	width: 25%;
+	float: left;
+	height: 100%;
 }
