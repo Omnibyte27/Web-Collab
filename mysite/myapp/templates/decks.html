@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="grad">
+	<center>
+		<h1>
+			<a href="http://localhost:8000">{{ variable }}</a>
+		</h1>
+	</center>
+</div>
+
+Deck management
+<br>
+
+<a href="http://localhost:8000/play/">
+<button class="button button1">Play</button>
+</a>
+
+<a href="http://localhost:8000/profile/">
+<button class="button button1">Profile</button>
+</a>
+
+<br>
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Create_New_Deck')" id="defaultOpen">Create New Deck</button>
+  <button class="tablinks" onclick="openCity(event, 'Edit_Existing_Deck')">Edit Existing Deck</button>
+</div>
+
+<div id="Create_New_Deck" class="tabcontent">
+  <h3>Create New Deck</h3>
+  <p>Create a new deck here.</p>
+</div>
+
+<div id="Edit_Existing_Deck" class="tabcontent">
+  <h3>Edit Existing Deck</h3>
+  <p>Edit an existing deck here.</p> 
+</div>
+
+{% endblock %}
+{% block scripts %}
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- development version, includes helpful console warnings -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="{% static "js/myvue.js" %}"></script>
+	<script src="{% static "js/page_open.js" %}"></script>
+{% endblock %}

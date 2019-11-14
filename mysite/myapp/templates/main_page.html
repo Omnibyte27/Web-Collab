@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="grad">
+	<center>
+		<h1>
+			<a href="http://localhost:8000">{{ variable }}</a>
+		</h1>
+	</center>
+</div>
+
+Main page
+<br>
+
+<div class="class1">
+{% if user.is_authenticated %}
+<a href="http://localhost:8000/play/">
+<button class="button button1">Play</button>
+</a>
+
+<a href="http://localhost:8000/decks/">
+<button class="button button1">Decks</button>
+</a>
+
+<a href="http://localhost:8000/profile/">
+<button class="button button1">Profile</button>
+</a>
+
+<a href="/logout/" class="button">Logout</a>
+{% else %}
+<a href="/login/" class="button">Login</a>
+{% endif %}
+
+<br>
+
+<br>
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Matches')" id="defaultOpen">Matches</button>
+  <button class="tablinks" onclick="openCity(event, 'Rankings')">Rankings</button>
+  <button class="tablinks" onclick="openCity(event, 'Updates')">Updates</button>
+  <button class="tablinks" onclick="openCity(event, 'HTP')">How to Play</button>
+</div>
+
+<div id="Matches" class="tabcontent">
+  <h3>Matches</h3>
+  <p>Matches appear here.</p>
+</div>
+
+<div id="Rankings" class="tabcontent">
+  <h3>Rankings</h3>
+  <p>Rankings appear here.</p> 
+</div>
+
+<div id="Updates" class="tabcontent">
+  <h3>Updates</h3>
+  <p>Updates appear here.</p>
+</div>
+
+<div id="HTP" class="tabcontent">
+  <h3>How to Play</h3>
+  <p>Instructions on how to play appear here.</p>
+</div>
+
+<!--
+    <textarea id="chat-log" cols="10" rows="15"></textarea><br/>
+    <input id="chat-message-input" type="text" size="100"/><br/>
+    <input id="chat-message-submit" type="button" value="Send"/>
+-->
+
+</div>
+
+
+<div class="class2">
+{% if user.is_authenticated %}
+<button class="open-button" onclick="openForm()">Chat</button>
+
+<div class="chat-popup" id="myForm">
+	<form action="/" method="post" class="form-container">
+		<h4>Chat</h4>
+		
+		{% csrf_token %}
+		{{ form }}
+		<input type="submit" class="success button" value="Submit">
+		<button type="button" class="alert button" onclick="closeForm()">Close</button>
+	</form>
+</div>
+
+<div id="app-4">
+	<ol>
+		<ul v-for="inp in inputs">
+			{% verbatim %}
+			{{ inp.author }} - {{ inp.input }} 
+			{% endverbatim %}
+		</ul>
+	</ol>
+</div>
+{% endif %}
+</div>
+
+{% endblock %}
+{% block scripts %}
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- development version, includes helpful console warnings -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="{% static "js/myvue.js" %}"></script>
+	<script src="{% static "js/page_open.js" %}"></script>
+	<script src="{% static "js/form_open.js" %}"></script>
+{% endblock %}

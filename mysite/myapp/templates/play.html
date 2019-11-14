@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="grad">
+	<center>
+		<h1>
+			<a href="http://localhost:8000">{{ variable }}</a>
+		</h1>
+	</center>
+</div>
+
+{% csrf_token %}
+{{ form2 }}
+		
+
+<div class="class1">
+Play
+<br>
+
+<a href="http://localhost:8000/decks/">
+<button class="button button1">Decks</button>
+</a>
+
+<a href="http://localhost:8000/profile/">
+<button class="button button1">Profile</button>
+</a>
+
+
+</div>
+
+<div class="class2">
+- Chat box goes here
+<br>
+
+{% if user.is_authenticated %}
+<button class="open-button" onclick="openForm()">Chat</button>
+
+- Needs to go to a different model anyways (user to user); sending a message isn't rendering
+<br>
+- There are also many places than need to be authenticated, but that can be done
+after functionality is in place.
+<div class="chat-popup" id="myForm">
+	<form action="/play/" method="post" class="form-container">
+		<h4>Chat</h4>
+		
+		{% csrf_token %}
+		{{ form2 }}
+		<input type="submit" class="success button" value="Submit">
+		<button type="button" class="alert button" onclick="closeForm()">Close</button>
+	</form>
+</div>
+
+<div id="app-4">
+	<ol>
+		<ul v-for="inp in inputs">
+			{% verbatim %}
+			{{ inp.input }} - {{ inp.author }}
+			{% endverbatim %}
+		</ul>
+	</ol>
+</div>
+{% endif %}
+
+</div>
+
+
+
+{% endblock %}
+{% block scripts %}
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- development version, includes helpful console warnings -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="{% static "js/myvue.js" %}"></script>
+	<script src="{% static "js/form_open.js" %}"></script>
+{% endblock %}
