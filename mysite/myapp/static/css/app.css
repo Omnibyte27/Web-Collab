@@ -5,7 +5,7 @@
   position: relative;
   animation-name: cloud;
   animation-duration: 4s;
-  animation-iteration-count: infinite;	
+  animation-iteration-count: infinite;
 }
 
 @keyframes cloud {
@@ -47,8 +47,8 @@ p.solid {
 }
 
 .button1 {
-  background-color: white; 
-  color: black; 
+  background-color: white;
+  color: black;
   border: 2px solid #4CAF50;
 }
 
@@ -74,7 +74,7 @@ body {
 	background-position: right top;
 	margin-right: 200px;
 	background-attachment: fixed;
-	
+
 	width: 100%;
 	float:left;
 }
@@ -226,4 +226,21 @@ body {
 	width: 25%;
 	float: left;
 	height: 100%;
+}
+
+
+
+/*CSS for the profile page*/
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: auto;
+  background-color:rgb(179, 230, 255);
+  text-align: center;
+}
+
+.a24 {
+  text-decoration: none;
+  font-size: 22px;
+  color: white;
 }
