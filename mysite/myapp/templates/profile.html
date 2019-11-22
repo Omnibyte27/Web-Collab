@@ -5,7 +5,7 @@
 <div id="grad">
 	<center>
 		<h1>
-			<a href="http://localhost:8000">{{ variable }}</a>
+			<a href="{% url 'main-page' %}">{{ variable }}</a>
 		</h1>
 	</center>
 </div>
@@ -13,13 +13,27 @@
 User profile
 <br>
 
-<a href="http://localhost:8000/play/">
+<a href="{% url 'play-page' %}">
 <button class="button button1">Play</button>
 </a>
 
-<a href="http://localhost:8000/decks/">
+<a href="{% url 'deck-page' %}">
 <button class="button button1">Decks</button>
 </a>
+
+<!--
+{{ object.matches_won }}
+{{ value.matches_won }}
+-->
+<br><br>
+Username: {{ user_data.username }}
+<br>
+Email: {{ user_data.email }}
+<br>
+Last login: {{ user_data.last_login }}
+<br>
+Date joined: {{ user_data.date_joined }}
+<br>
 
 {% endblock %}
 {% block scripts %}

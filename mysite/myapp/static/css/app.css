@@ -1,21 +1,4 @@
-#animate {
-  width: 100px;
-  height: 100px;
-  background-color: white;
-  position: relative;
-  animation-name: cloud;
-  animation-duration: 4s;
-  animation-iteration-count: infinite;	
-}
-
-@keyframes cloud {
-  0%   {background-color:transparent; left:0px; top:0px;}
-  25%  {background-color:transparent; left:0px; top:25px;}
-  50%  {background-color:transparent; left:0px; top:0px;}
-  75%  {background-color:transparent; left:0px; top:-25px;}
-  100% {background-color:transparent; left:0px; top:0px;}
-}
-
+/* Title bar element*/
 #grad {
   height: 100px;
   background-color: white;
@@ -23,12 +6,14 @@
   border-radius: 12px;
 }
 
+/* Title bar element*/
 p.solid {
 	border-style: solid;
 	background-color: lightblue;
 	border-radius: 12px;
 }
 
+/*Button formatting*/
 .button {
   background-color: #4CAF50; /* Green */
   color: lightblue;
@@ -46,17 +31,20 @@ p.solid {
   cursor: pointer;
 }
 
+/*Button formatting*/
 .button1 {
   background-color: white; 
   color: black; 
   border: 2px solid #4CAF50;
 }
 
+/*Button formatting*/
 .button1:hover {
   background-color: #4CAF50;
   color: white;
 }
 
+/*Header formatting*/
 h1 {
 	font-family: Verdana;
 	font-size: 2.5em;
@@ -79,6 +67,7 @@ body {
 	float:left;
 }
 
+/*Paragraph formatting*/
 .p_p {
   margin-top: 10px;
   margin-bottom: 100px;
@@ -93,6 +82,7 @@ body {
     top:-40px;
 }
 
+/*Paragraph formatting*/
 .p__p {
   margin-top: 100px;
   margin-bottom: 100px;
@@ -214,14 +204,15 @@ body {
   opacity: 1;
 }
 
-/*Divides the page 75%/25% to accommodate chat*/
-
+/*Divides the page 75% to accommodate chat*/
 .class1 {
 	width: 75%;
 	float: left;
 	height: 100%;
 }
 
+/*Divides the page 25% to accommodate chat*/
+/*Place the chat in this div*/
 .class2 {
 	width: 25%;
 	float: left;

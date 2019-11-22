@@ -5,7 +5,7 @@
 <div id="grad">
 	<center>
 		<h1>
-			<a href="http://localhost:8000">{{ variable }}</a>
+			<a href="{% url 'main-page' %}">{{ variable }}</a>
 		</h1>
 	</center>
 </div>
@@ -13,28 +13,43 @@
 Deck management
 <br>
 
-<a href="http://localhost:8000/play/">
+<a href="{% url 'play-page' %}">
 <button class="button button1">Play</button>
 </a>
 
-<a href="http://localhost:8000/profile/">
+<a href="{% url 'profile-page' %}">
 <button class="button button1">Profile</button>
 </a>
 
 <br>
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'Create_New_Deck')" id="defaultOpen">Create New Deck</button>
-  <button class="tablinks" onclick="openCity(event, 'Edit_Existing_Deck')">Edit Existing Deck</button>
+  <button class="tablinks" onclick="openCity(event, 'View_Decks')" id="defaultOpen">View Decks</button>
+  <button class="tablinks" onclick="openCity(event, 'Create_Deck')">Create Deck</button>
 </div>
 
-<div id="Create_New_Deck" class="tabcontent">
-  <h3>Create New Deck</h3>
-  <p>Create a new deck here.</p>
+<div id="View_Decks" class="tabcontent">
+	<h3>View Decks</h3>
+	<p>Currently created decks:</p>
+	{% for deck_content in deck_list %}
+		<!--Deck name and contents-->
+		<a class="deck-title" href="{% url 'deck-detail' deck_content.deck_name %}">{{deck_content.deck_name}}</a>, {{deck_content.card1.card_name}}, {{deck_content.card2.card_name}}, {{deck_content.card3.card_name}}, {{deck_content.card4.card_name}}, {{deck_content.card5.card_name}} 
+		<br>
+		<!--Deck operations Edit/Delete-->
+		<a class="deck-title" href="{% url 'deck-update' deck_content.deck_name %}">Edit</a>      
+		<a class="deck-title" href="{% url 'deck-delete' deck_content.deck_name %}">Delete</a>
+		<br>
+	{% endfor %}
 </div>
 
-<div id="Edit_Existing_Deck" class="tabcontent">
-  <h3>Edit Existing Deck</h3>
-  <p>Edit an existing deck here.</p> 
+<div id="Create_Deck" class="tabcontent">
+	<h3>Create Deck</h3>
+	<p>Create decks here.</p>
+	<form action="{% url 'deck-page' %}" method="post">
+		{% csrf_token %}
+		{{ create_deck_form }}
+		<input type="submit" class="success button" value="Submit">
+		<a class="btn btn-outline-secondary" href="{% url 'deck-page' %}">Cancel</a>
+	</form>
 </div>
 
 {% endblock %}
