@@ -32,7 +32,6 @@ LOGIN_REDIRECT_URL = "/"
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',  
     'myapp',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,7 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
-ASGI_APPLICATION = 'mysite.routing.application'
 
 
 # Database
