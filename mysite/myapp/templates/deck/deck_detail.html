@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+Deck Detail
+<br>
+{{object.deck_name}}, {{object.card1.card_name}}, {{object.card2.card_name}}, {{object.card3.card_name}}, {{object.card4.card_name}}, {{object.card5.card_name}} 
+<br>
+<a href="{% url 'deck-page' %}">
+	<button class="button button1">Return to Decks</button>
+</a>
+
+{% endblock %}
+{% block scripts %}
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- development version, includes helpful console warnings -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="{% static "js/myvue.js" %}"></script>
+	<script src="{% static "js/page_open.js" %}"></script>
+{% endblock %}

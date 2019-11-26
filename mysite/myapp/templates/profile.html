@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>3by3</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/small-business.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+			<a href="{% url 'play-page' %}">
+      <span class="navbar-brand" href="#">3 by 3 game</a>
+
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a href="{% url 'play-page' %}">
+						<span class="nav-link" href='#'>Play
+						</a>
+					</li>
+
+					<li class="nav-item active">
+					<a href="{% url 'deck-page' %}">
+					<span class="nav-link" href='#'>Decks
+					</a>
+					</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Heading Row -->
+    <div class="row align-items-center my-5">
+      <div class="col-lg-7">
+				<img class="img-fluid rounded mb-4 mb-lg-0" src="/static/images/gold.jpg" alt="">
+      </div>
+      <!-- /.col-lg-8 -->
+      <div class="col-lg-5">
+        <h1 class="font-weight-light">Latest Update!</h1>
+        <p>Microtransactions are great. Buy from us, gold currency coming soon!</p>
+				<a href="{% url 'play-page' %}">
+        <span class="btn btn-primary" href="#">Latest News</a>
+      </div>
+      <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+
+    <!-- Call to Action Well -->
+    <div class="card text-white bg-secondary my-5 py-4 text-center">
+      <div class="card-body">
+				<p class="text0white m-0"><font size = "6">Username: {{ user_data.username }} </font></p>
+				<p class="text0white m-0"><font size = "6">Email: {{ user_data.email }} </font></p>
+				<p class="text0white m-0"><font size = "6">Last login: {{ user_data.last_login }} </font></p>
+				<p class="text0white m-0"><font size = "6">Date joined: {{ user_data.date_joined }} </font></p>
+      </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Rank</h2>
+            <p class="card-text"><font size="6">49th</font></p>
+          </div>
+          <div class="card-footer">
+          </div>
+        </div>
+      </div>
+      <!-- /.col-md-4 -->
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Games Played</h2>
+            <p class="card-text"><font size="6">3</font></p>
+          </div>
+          <div class="card-footer">
+          </div>
+        </div>
+      </div>
+      <!-- /.col-md-4 -->
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Win Percentage</h2>
+            <p class="card-text"><font size="6">40%</font></p>
+          </div>
+				<div class="card-footer">
+				</div>
+
+        </div>
+      </div>
+      <!-- /.col-md-4 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+
+	<!--
+	{{ object.matches_won }}
+	{{ value.matches_won }}
+	-->
+
+	{% block scripts %}
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<!-- development version, includes helpful console warnings -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="{% static "js/myvue.js" %}"></script>
+	{% endblock %}
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>
