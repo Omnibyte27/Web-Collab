@@ -1,0 +1,150 @@
+/*Remove*/
+body {
+    height: 100vh;
+    display: flex;
+    background: lightgrey;
+}
+
+.details {
+    background: white;
+    width: 300px;
+    height: 200px;
+    display: inline-block;
+    overflow: auto;
+    white-space: nowrap;
+    margin: 0px auto;
+    border: 6px black solid;
+    border-color: darkgrey;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.text {
+    /*------------------------------------------- Regular text*/
+    font-size: 1vw;
+    word-wrap: break-word;
+    transform: rotateY(180deg);
+}
+
+.text.white {
+    /*------------------------------------------- White text*/
+    color: white;
+}
+
+.memory-game {
+    background: black;
+    padding: 25px;
+    border-radius: 25px;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
+
+.memory-card {
+    width: calc(20% - 10px);
+    height: calc(25% - 10px);
+    margin: 5px;
+    position: relative;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+}
+
+/*Remove*/
+.memory-card:active {
+    transform: scale(0.97);
+    transition: transform .2s;
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
+
+.front-face {
+    background-color: lightgray;
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    word-wrap: break-word;
+    border: 2px solid white;
+    position: absolute;
+    border-radius: 25px;
+}
+
+/* Card Colors */
+.front-face.red {
+    /*------------------------------------------- Match 1*/
+    background-color: rgb(255, 87, 87);
+}
+
+.front-face.orange {
+    /*------------------------------------------- Match 2*/
+    background-color: orange;
+}
+
+.front-face.yellow {
+    /*------------------------------------------- Match 3*/
+    background-color: yellow;
+}
+
+.front-face.yellowgreen {
+    /*------------------------------------------- Match 4*/
+    background-color: yellowgreen;
+}
+
+.front-face.green {
+    /*------------------------------------------- Match 5*/
+    background-color: rgb(77, 177, 77);
+}
+
+.front-face.lightblue {
+    /*------------------------------------------- Match 6*/
+    background-color: lightblue;
+}
+
+.front-face.elecblue {
+    /*------------------------------------------- Match 7*/
+    background-color: #33FFBD;
+}
+
+.front-face.oceanblue {
+    /*------------------------------------------- Match 8*/
+    background-color: #34D8EB;
+}
+
+.front-face.purple {
+    /*------------------------------------------- Match 9*/
+    background-color: rgb(179, 153, 209);
+}
+
+.front-face.rose {
+    /*------------------------------------------- Match 10*/
+    background-color: rgb(187, 82, 156);
+}
+
+.back-face {
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    border: 2px solid white;
+    position: absolute;
+    border-radius: 25px;
+    backface-visibility: hidden;
+
+    /*
+    background-color: lightgray;
+    color: white;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    */
+}
+
+.back-face:hover {
+    /*-------------------------------------------*/
+    transform: scale(1.05);
+    /*transition: transform .5s;*/
+}

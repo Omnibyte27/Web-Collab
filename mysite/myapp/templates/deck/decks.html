@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="grad">
+	<center>
+		<h1>
+			<a href="{% url 'main-page' %}">{{ variable }}</a>
+		</h1>
+	</center>
+</div>
+
+<br>
+<b>Profile Information:</b>
+<br>
+Username: {{ user_data.username }}
+<br>
+Email: {{ user_data.email }}
+<br>
+Last login: {{ user_data.last_login }}
+<br>
+Date joined: {{ user_data.date_joined }}
+<br>
+
+<br>
+<div class="tab">
+	<button class="tablinks" onclick="openTab(event, 'View_Decks')" id="defaultOpen">View Decks</button>
+	<button class="tablinks" onclick="openTab(event, 'Create_Deck')">Create Deck</button>
+	<button class="tablinks" onclick="openTab(event, 'Card Catalog')">Card Catalog</button>
+</div>
+
+<div id="View_Decks" class="tabcontent">
+	<h3>View Decks</h3>
+	<p>Currently created decks:</p>
+
+	<table class="tg" style="width:35%">
+		<tr>
+			<th class="tg-rpls">Deck Name</th>
+			<th class="tg-rpls">Card 1</th>
+			<th class="tg-rpls">Card 2</th>
+			<th class="tg-rpls">Card 3</th>
+			<th class="tg-rpls">Card 4</th>
+			<th class="tg-rpls">Card 5</th>
+		</tr>
+		<!--TEMPLATE-->
+		{% for deck_content in deck_list %}
+		<tr>
+			<!--Deck name and contents-->
+			<td class="tg-0lax">
+				<h5><a class="deck-title"
+						href="{% url 'deck-detail' deck_content.deck_name %}">{{deck_content.deck_name}}</a></h5>
+				<!--Deck operations Edit/Delete-->
+				<u><a class="deck-title" href="{% url 'deck-update' deck_content.deck_name %}">Edit</a></u>
+				<u><a class="deck-title" href="{% url 'deck-delete' deck_content.deck_name %}">Delete</a></u>
+			</td>
+			<td>{{deck_content.card1.card_name}}</td>
+			<td>{{deck_content.card2.card_name}}</td>
+			<td>{{deck_content.card3.card_name}}</td>
+			<td>{{deck_content.card4.card_name}}</td>
+			<td>{{deck_content.card5.card_name}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+</div>
+
+<div id="Create_Deck" class="tabcontent">
+	<h3>Create Deck</h3>
+	<p>Create decks here.</p>
+	<form action="{% url 'deck-page' %}" method="post">
+		{% csrf_token %}
+		{{ create_deck_form }}
+		<input type="submit" class="success button" value="Submit">
+		<a class="btn btn-outline-secondary" href="{% url 'deck-page' %}">Cancel</a>
+	</form>
+</div>
+
+<div id="Card Catalog" class="tabcontent">
+	<h3>Card Catalog</h3>
+	<p>View all cards here.</p>
+
+	<table class="tg" style="width:35%">
+			<tr>
+				<th class="tg-rpls">Card Name</th>
+				<th class="tg-rpls">Top Value</th>
+				<th class="tg-rpls">Left Value</th>
+				<th class="tg-rpls">Right Value</th>
+				<th class="tg-rpls">Bottom Value</th>
+			</tr>
+			<!--Card catalog details-->
+			{% for card in catalog %}
+			<tr>
+				<td><h5>{{card.card_name}}</h5></td>
+				<td>{{card.top_value}}</td>
+				<td>{{card.left_value}}</td>
+				<td>{{card.right_value}}</td>
+				<td>{{card.bottom_value}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="{% static "js/page_open.js" %}"></script>
+{% endblock %}

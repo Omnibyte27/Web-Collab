@@ -1,11 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
-
 from django.forms import ModelForm
-
 from django.urls import reverse
+from django.utils import timezone
 
 # Create your models here.
+
+#For storing developer messages
+class DevMessages(models.Model):
+    m_author = models.ForeignKey(User, on_delete=models.CASCADE)
+    #timestamp = models.DateTimeField(default = timezone.now())
+    title = models.CharField(max_length=50, blank=True)
+    post = models.CharField(max_length=500, blank=True)
+
+    #Renders infomation from object
+    def __str__(self):
+        return self.title
 
 #For storing card details
 class CardCatalogue(models.Model):
@@ -19,21 +29,6 @@ class CardCatalogue(models.Model):
     #Renders infomation from object
     def __str__(self):
         return self.card_name
-
-#For storing profile details
-class Profile(models.Model):
-    p_username = models.OneToOneField(
-        User,
-        on_delete = models.CASCADE, 
-        primary_key=True        
-    )
-    matches_won = models.IntegerField(default = 0)
-    matches_lost = models.IntegerField(default = 0)
-    matches_total = models.IntegerField(default = 0)
-
-    #Renders infomation from object
-    def __str__(self):
-        return self.p_username.username
 
 #For storing deck details
 class Deck(models.Model):
@@ -73,17 +68,21 @@ class Deck(models.Model):
     def get_absolute_url(self):
         return reverse('deck-page')
 
-#Delete
-class UpdateDeck(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    deck_name = models.ForeignKey(Deck, on_delete=models.CASCADE)
+##################################################################
+class Challenge(models.Model):
+    user_from = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_from')
+    user_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_to')
+    user_from_deck = models.ForeignKey(Deck, on_delete=models.CASCADE, related_name='user_from_deck')
+    user_to_deck = models.ForeignKey(Deck, on_delete=models.CASCADE, related_name='user_to_deck')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     #Renders infomation from object
     def __str__(self):
-        return self.deck_name
+        date_str = str(self.created_at)
+        return self.user_from.username + " challenged " + self.user_to.username + " on " + date_str
+
 ##################################################################
-### Keep in
-#For chat
+###For chat
 class Input(models.Model):
     input = models.CharField(max_length=300)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -91,11 +90,3 @@ class Input(models.Model):
     #Renders infomation from object
     def __str__(self):
         return self.author.username + " " + self.input
-        
-class Comment(models.Model):
-    comment = models.CharField(max_length=240)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    input = models.ForeignKey(Input, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.author.username + " " + self.comment

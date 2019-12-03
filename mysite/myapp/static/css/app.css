@@ -8,14 +8,15 @@
 
 /* Title bar element*/
 p.solid {
-	border-style: solid;
-	background-color: lightblue;
-	border-radius: 12px;
+  border-style: solid;
+  background-color: lightblue;
+  border-radius: 12px;
 }
 
 /*Button formatting*/
 .button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
+  /* Green */
   color: lightblue;
   border: none;
   border-radius: 12px;
@@ -26,15 +27,16 @@ p.solid {
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
   transition-duration: 0.4s;
   cursor: pointer;
 }
 
 /*Button formatting*/
 .button1 {
-  background-color: white; 
-  color: black; 
+  background-color: white;
+  color: black;
   border: 2px solid #4CAF50;
 }
 
@@ -46,25 +48,25 @@ p.solid {
 
 /*Header formatting*/
 h1 {
-	font-family: Verdana;
-	font-size: 2.5em;
-	color: white;
-	text-shadow: 1px 1px 2px black, 0 0 25px lightblue, 0 0 5px black;
-    text-align: center;
-    width: 650px;
-    vertical-align:middle;
+  font-family: Verdana;
+  font-size: 2.5em;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px lightblue, 0 0 5px black;
+  text-align: center;
+  width: 650px;
+  vertical-align: middle;
 }
 
 body {
-	background-color: #fcf8e3;
-	/* background-image: url(https://freedesignfile.com/upload/2017/08/earth-icon-vector.png); */
-	background-repeat: no-repeat;
-	background-position: right top;
-	margin-right: 200px;
-	background-attachment: fixed;
-	
-	width: 100%;
-	float:left;
+  background-color: #fcf8e3;
+  /* background-image: url(https://freedesignfile.com/upload/2017/08/earth-icon-vector.png); */
+  background-repeat: no-repeat;
+  background-position: right top;
+  margin-right: 200px;
+  background-attachment: fixed;
+
+  width: 100%;
+  float: left;
 }
 
 /*Paragraph formatting*/
@@ -76,10 +78,10 @@ body {
 }
 
 .form_style {
-    width:0px;
-    margin:150px ;
-    float:right;
-    top:-40px;
+  width: 0px;
+  margin: 150px;
+  float: right;
+  top: -40px;
 }
 
 /*Paragraph formatting*/
@@ -90,14 +92,14 @@ body {
   margin-left: 80px;
 }
 
-/* Style the tab */
+/* Style for the tab */
 .tab {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
 }
 
-/* Style the buttons inside the tab */
+/* Style for the buttons inside the tab */
 .tab button {
   background-color: inherit;
   float: left;
@@ -128,7 +130,9 @@ body {
 }
 
 /*----------------------------------------*/
-{box-sizing: border-box;}
+  {
+  box-sizing: border-box;
+}
 
 /* Button used to open the chat form - fixed at the bottom of the page */
 .open-button {
@@ -190,7 +194,7 @@ body {
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
@@ -200,21 +204,41 @@ body {
 }
 
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
+.form-container .btn:hover,
+.open-button:hover {
   opacity: 1;
 }
 
 /*Divides the page 75% to accommodate chat*/
 .class1 {
-	width: 75%;
-	float: left;
-	height: 100%;
+  width: 75%;
+  float: left;
+  height: 100%;
 }
 
 /*Divides the page 25% to accommodate chat*/
 /*Place the chat in this div*/
 .class2 {
-	width: 25%;
-	float: left;
-	height: 100%;
+  width: 25%;
+  float: left;
+  height: 100%;
+}
+
+/* Game */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button_r {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 32px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

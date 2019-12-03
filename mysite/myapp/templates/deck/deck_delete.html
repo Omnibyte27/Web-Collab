@@ -3,25 +3,24 @@
 
 {% block content %}
 <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Delete Deck</legend>
-                <h2>Are you sure you want to delete the deck "{{ object.deck_name }}"</h2>
-            </fieldset>
-            <div class="form-group">
-                <button class="alert button" input type="submit">Yes, Delete</button>
-                <a href="{% url 'deck-page' %}">
-                    <button class="button button1" type="button">Cancel</button>
-                </a>                  
-            </div>
-        </form>
-    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <h2>Are you sure you want to delete the deck "{{ object.deck_name }}"?</h2>
+        </fieldset>
+        <div class="form-group">
+            <button class="alert button" input type="submit">Yes, Delete</button>
+            <a href="{% url 'deck-page' %}">
+                <button class="button button1" type="button">Cancel</button>
+            </a>
+        </div>
+    </form>
+</div>
 {% endblock %}
 {% block scripts %}
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<!-- development version, includes helpful console warnings -->
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<script src="{% static "js/myvue.js" %}"></script>
-	<script src="{% static "js/page_open.js" %}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="{% static "js/myvue.js" %}"></script>
+<script src="{% static "js/page_open.js" %}"></script>
 {% endblock %}

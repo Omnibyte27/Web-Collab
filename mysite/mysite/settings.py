@@ -25,7 +25,7 @@ SECRET_KEY = 'spem4+9c34x1hx9cjh29tpml1t3w83gk&$+)6m)!v!^hx3yt*&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.208.142.79']
+ALLOWED_HOSTS = ['localhost']
 
 LOGIN_REDIRECT_URL = "/"
 
@@ -33,6 +33,7 @@ LOGIN_REDIRECT_URL = "/"
 
 INSTALLED_APPS = [
     'myapp',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,7 +71,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
+ASGI_APPLICATION = 'mysite.routing.application'
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('redis', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

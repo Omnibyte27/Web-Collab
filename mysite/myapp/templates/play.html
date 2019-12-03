@@ -2,40 +2,66 @@
 {% load static %}
 
 {% block content %}
-<div id="grad">
-	<center>
-		<h1>
-			<a href="{% url 'main-page' %}">{{ variable }}</a>
-		</h1>
-	</center>
-</div>
 
-{% csrf_token %}
-{{ form2 }}
+{% if user.is_authenticated %}
+<form action="/game/{{player}}/matching/" id="form" method="post">
+	{% csrf_token %}
+	{{create_deck_form}}
+	<input type="submit" class="success button" value="Combine Decks">
+	<a href="{% url 'main-page' %}">
+		<button type="button" class="alert button">Cancel</button>
+	</a>
+</form>
+{% endif %}
 
-<div class="class1">
-Play
+<br>
+<h5>Currently created decks by {{ opponent.username }}:</h5>
 <br>
 
-<a href="{% url 'deck-page' %}">
-<button class="button button1">Decks</button>
-</a>
+<table class="tg" style="width:35%">
+	<tr>
+		<th class="tg-rpls">Deck Name</th>
+		<th class="tg-rpls">Card 1</th>
+		<th class="tg-rpls">Card 2</th>
+		<th class="tg-rpls">Card 3</th>
+		<th class="tg-rpls">Card 4</th>
+		<th class="tg-rpls">Card 5</th>
+	</tr>
+	<!--TEMPLATE-->
+	{% for deck_content in deck_list %}
+	<tr>
+		<!--Deck name and contents-->
+		<td>{{deck_content.deck_name}}</td>
+		<td>{{deck_content.card1.card_name}}</td>
+		<td>{{deck_content.card2.card_name}}</td>
+		<td>{{deck_content.card3.card_name}}</td>
+		<td>{{deck_content.card4.card_name}}</td>
+		<td>{{deck_content.card5.card_name}}</td>
+	</tr>
+	{% endfor %}
+</table>
+</table>
 
-<a href="{% url 'profile-page' %}">
-<button class="button button1">Profile</button>
-</a>
-</div>
 
-<div class="class2">
-- Chat box goes here
+
+<!--
+{{ deck1.user_from }} {{ deck1.user_to }} {{ deck1.user_from_deck }} {{ deck1.user_to_deck }}
 <br>
-</div>
+{{ deck2.user_from }} {{ deck2.user_to }} {{ deck2.user_from_deck }} {{ deck2.user_to_deck }}
+<br>
+{{ deck.deck_name }} {{ deck.card1 }}
+-->
 
 {% endblock %}
 {% block scripts %}
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<!-- development version, includes helpful console warnings -->
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<script src="{% static "js/myvue.js" %}"></script>
-	<script src="{% static "js/form_open.js" %}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="{% static "js/myvue.js" %}"></script>
+<script language="JavaScript" type="text/javascript" src="{% static "js/page_open.js" %}"></script>
+<script language="JavaScript" type="text/javascript" src="{% static "js/game.js" %}"></script>
+<script language="JavaScript" type="text/javascript">
+
+
+</script>
 {% endblock %}
