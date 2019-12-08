@@ -9,7 +9,6 @@ from django.utils import timezone
 #For storing developer messages
 class DevMessages(models.Model):
     m_author = models.ForeignKey(User, on_delete=models.CASCADE)
-    #timestamp = models.DateTimeField(default = timezone.now())
     title = models.CharField(max_length=50, blank=True)
     post = models.CharField(max_length=500, blank=True)
 
@@ -32,7 +31,7 @@ class CardCatalogue(models.Model):
 
 #For storing deck details
 class Deck(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "d_author")
     deck_name = models.CharField(max_length=25, primary_key=True)
     card1 = models.ForeignKey(
         CardCatalogue,
@@ -78,8 +77,7 @@ class Challenge(models.Model):
 
     #Renders infomation from object
     def __str__(self):
-        date_str = str(self.created_at)
-        return self.user_from.username + " challenged " + self.user_to.username + " on " + date_str
+        return str(self.user_from.username) + " combined their deck \"" + str(self.user_from_deck) + "\" with " + str(self.user_to.username) + "\'s deck \"" + str(self.user_to_deck) + "\""
 
 ##################################################################
 ###For chat

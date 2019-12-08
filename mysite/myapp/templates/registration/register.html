@@ -1,14 +1,16 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Registration{% endblock %}
 {% block content %}
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
 <div class="grid-x grid-padding-x">
-  <!-- <div class="large-4 medium-4 small-12 cell"></div> -->
   <div class="large-4 medium-4 small-12 large-offset-4 medium-offset-4 cell">
 
     <form action="/register/" method="post">
         {% csrf_token %}
-        <h4 class="text-center">Register</h4>
+        <h2 class="text-center">Register</h2>
         {{ form.errors }}
         {{ form.username.label_tag }}
         {{ form.username }}
@@ -18,7 +20,7 @@
         {{ form.password1 }}
         {{ form.password2.label_tag }}
         {{ form.password2 }}
-        <input type="submit" class="button expanded" value="Register" />
+        <input type="submit" class="btn btn-success btn-lg btn-block" value="Register" />
     </form>
   </div>
 </div>

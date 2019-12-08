@@ -2,25 +2,43 @@
 {% load static %}
 
 {% block content %}
-<div class="content-section">
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <h2>Are you sure you want to delete the deck "{{ object.deck_name }}"?</h2>
-        </fieldset>
-        <div class="form-group">
-            <button class="alert button" input type="submit">Yes, Delete</button>
-            <a href="{% url 'deck-page' %}">
-                <button class="button button1" type="button">Cancel</button>
-            </a>
-        </div>
-    </form>
+<div class="card border-secondary mb-3" style="max-width: 20rem;">
+    <div class="card-header">Confirmation</div>
+    <div class="card-body">
+        <h4 class="card-title">Are you sure you want to delete the deck "{{ object.deck_name }}"?</h4>
+        <button class="btn btn-danger" input type="submit">Yes, Delete</button>
+        <a href="{% url 'deck-page' %}">
+            <button class="btn btn-success" type="button">Cancel</button>
+        </a>
+    </div>
 </div>
+
+<table class="tg" style="width:35%">
+    <tr>
+        <th class="tg-rpls">Deck Name</th>
+        <th class="tg-rpls">Card 1</th>
+        <th class="tg-rpls">Card 2</th>
+        <th class="tg-rpls">Card 3</th>
+        <th class="tg-rpls">Card 4</th>
+        <th class="tg-rpls">Card 5</th>
+    </tr>
+    <!--TEMPLATE-->
+    <tr>
+        <!--Deck name and contents-->
+        <td class="tg-0lax">
+            <h5>{{object.deck_name}}</h5>
+        </td>
+        <td>{{object.card1.card_name}}</td>
+        <td>{{object.card2.card_name}}</td>
+        <td>{{object.card3.card_name}}</td>
+        <td>{{object.card4.card_name}}</td>
+        <td>{{object.card5.card_name}}</td>
+    </tr>
+</table>
+
 {% endblock %}
 {% block scripts %}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="{% static "js/myvue.js" %}"></script>
-<script src="{% static "js/page_open.js" %}"></script>
 {% endblock %}

@@ -2,25 +2,10 @@
 {% load static %}
 
 {% block content %}
-<div id="grad">
-	<center>
-		<h1>
-			<a href="{% url 'main-page' %}">{{ variable }}</a>
-		</h1>
-	</center>
-</div>
-
 <!--Divides page up 75%-->
 <div class="class1">
 	{% if user.is_authenticated %}
 	<!--IS AUTH-->
-
-	<a href="{% url 'deck-page' %}">
-		<button class="button button1">Decks</button>
-	</a>
-
-	<a href="/logout/" class="button">Logout
-	</a>
 
 	<!--Displays a valid list of opponents the user can challenge-->
 	{{ fields }}
@@ -29,19 +14,61 @@
 	<!--END AUTH-->
 
 	<!--Tabs and tab content-->
-	<div class="tab">
+	<div class="tab nav nav-tabs">
 		<!--Opens by default-->
-		<button class="tablinks" onclick="openTab(event, 'Play')" id="defaultOpen">Play the Game</button>
-		<button class="tablinks" onclick="openTab(event, 'HTP')">How to Play</button>
-		<button class="tablinks" onclick="openTab(event, 'Updates')">Updates</button>
+		<button class="tablinks nav-item" onclick="openTab(event, 'Play')" id="defaultOpen" style="outline:0;">Play the
+			Game</button>
+		<button class="tablinks nav-item" onclick="openTab(event, 'HTP')" style="outline:0;">How to Play</button>
+		<button class="tablinks nav-item" onclick="openTab(event, 'Updates')" style="outline:0;">Updates</button>
 	</div>
 
-	<div id="Play" class="tabcontent">
+	<div id="Play" class="tabcontent" style="position: relative;">
 		<h3>Play the Game</h3>
 
 		{% if user.is_authenticated %}
 		<!--IS AUTH-->
-		<p>Matchmaking appears here.</p>
+
+		<div id="app-6">
+			<span v-if="seen">
+				<div class="card border-secondary mb-3" style="max-width: 20rem; display:inline-block;">
+					<div class="card-header">Last Player's Deck You Used</div>
+					<div class="card-body">
+						{{ challenge_from }}
+					</div>
+				</div>
+			</span>
+
+			<span v-if="unseen">
+				<div class="card border-secondary mb-3" style="max-width: 20rem; display:inline-block;">
+					<div class="card-header">Last Player's Deck You Used</div>
+					<div v-for="inp in user_from_challenge" class="card-body">
+						[[inp.user_from]] combined their deck "[[inp.user_from_deck]]" with [[inp.user_to]]'s deck
+						"[[inp.user_to_deck]]"
+					</div>
+				</div>
+			</span>
+		</div>
+
+		<div id="app-7">
+			<span v-if="seen">
+				<div class="card border-secondary mb-3" style="max-width: 20rem; display:inline-block;">
+					<div class="card-header">Last Player Who Used Your Deck</div>
+					<div class="card-body">
+						{{ challenge_to }}
+					</div>
+				</div>
+			</span>
+
+			<span v-if="unseen">
+				<div class="card border-secondary mb-3" style="max-width: 20rem; display:inline-block;">
+					<div class="card-header">Last Player Who Used Your Deck</div>
+					<div v-for="inp in user_to_challenge" class="card-body">
+						[[inp.user_from]] combined their deck "[[inp.user_from_deck]]" with [[inp.user_to]]'s deck
+						"[[inp.user_to_deck]]"
+					</div>
+				</div>
+			</span>
+		</div>
 
 		<table class="tg" style="width:35%">
 			<tr>
@@ -50,57 +77,54 @@
 			</tr>
 
 			<!--TEMPLATE-->
-			{% for player in player_list %}
-			<td class="tg-0lax">{{ player.author }}</td>
-			<td class="tg-0lax">
-				<center>
-					<a href="{% url 'p_view' player.author %}">
-						<button class="button button1">Combine Decks</button>
+			{% for player in values %}
+			<tr>
+				<td class="tg-0lax">{{ player }}</td>
+				<td class="tg-0lax">
+					<a href="{% url 'p_view' player %}">
+						<button type="button" class="btn btn-success">Combine Decks</button>
 					</a>
-				</center>
-			</td>
+				</td>
+			</tr>
 			{% endfor %}
 		</table>
 
 		{% else %}
 		<!--END AUTH-->
-		<p>Login to play a match.</p>
-		<a href="/login/" class="button">Login</a>
+		<p>Register or login to play the game.</p>
+		<a href="/register/" class="btn btn-success">Register</a>
+		<a href="/login/" class="btn btn-primary">Login</a>
 		{% endif %}
 	</div>
 
 	<div id="HTP" class="tabcontent">
 		<h3>How to Play</h3>
-		<p>Instructions on how to play.</p>
-
 		<ol>
 			<li>
-				You cannot play without first creating a deck of your own.
-				Ensure you've done so by clicking on the "Decks" button in
-				the upper left side of this page. Then, navigate to the "Create Deck"
+				First, create a deck of your own in order to play the game.
+				Ensure you've done so by logging in and clicking on "Decks" button in
+				the Navigation bar. Then, navigate to the "Create Deck"
 				tab to build your new deck.
 			</li>
 			<li>
-				Choose your opponent from the "Play the Game" tab.
+				Choose your opponent from the "Play the Game" tab on the home page.
 			</li>
 			<li>
 				Choose both one deck of your own and one deck of your opponent to combine.
 			</li>
 			<li>
-				You'll now be taken to the game page where you'll need to flip the cards to 
+				You'll be taken to the game page where you'll need to flip cards to
 				find matches. Finding all ten matches wins the game.
 			</li>
 			<li>
 				From here, you can either play with the deck of the same opponent again, or
-				return to the main page and choose another opponent's deck to play with.
+				return to the home page and choose another opponent's deck to play with.
 			</li>
 		</ol>
 	</div>
 
 	<div id="Updates" class="tabcontent">
-		<h3>Updates</h3>
-		<p>Developer updates appear here.</p>
-
+		<h3>Developer Updates</h3>
 		{% for dev_post in dev_posts %}
 		<table class="tg" style="width:40%">
 			<tr>
@@ -108,7 +132,6 @@
 					<h4>{{ dev_post.title }}</h4>
 					Author: {{ dev_post.m_author }}
 				</td>
-
 			</tr>
 			<tr>
 				<td>{{ dev_post.post }}</td>
@@ -123,44 +146,20 @@
 
 <!--Divides page up 25%-->
 <div class="class2">
+	<br>
 	<center>
-		<h3>Chat</h3>
+		<h3 class="card text-white bg-secondary mb-3">Chat</h3>
 	</center>
-	<!--
-	<textarea id="chat-log" cols="100" rows="15" onkeypress="return false;"></textarea><br />
-	{% if user.is_authenticated %}
-	<input id="chat-message-input" type="text" size="100" /><br />
-	<input id="chat-message-submit" class="button button3" type="button" value="Send" />
-	{% endif %}
-	-->
 
-<textarea id="chat-items" cols="100" rows="15" style="cursor :default" readonly>{% for input_message in input_messages %}
+	<textarea id="chat-items" cols="100" rows="15" style="cursor :default" readonly>{% for input_message in input_messages %}
 {{ input_message.author.username }}: {{ input_message.input }}{% endfor %}</textarea>
 
-	<!--
-	<table>
-		<tr id="chat-items">
-			<td class="tg-rpls">
-			</td>
-		</tr>
-	</table>
-	-->
-
-	<!--
-	<table id="chat-items" class="tg" style="width:40%">
-		{% for input_message in input_messages %}
-		{{ input_message.author.username }}: {{ input_message.input }} Not this one
-		{{ input_message.author.username }}: {{ input_message.input }}
-		<br>
-		{% endfor %}
-	</table>
-	-->
 	{% if user.is_authenticated %}
-	<form id="form" method="post">
-		<input type='hidden' id='myUsername' value='{{ user.username }}' />
+	<form class="form-inline my-2 my-lg-0" id="form" method="post">
+		<input class="form-control mr-sm-2" type='hidden' id='myUsername' value='{{ user.username }}' />
 		{% csrf_token %}
 		{{ form }}
-		<input type="submit" class="success button" value="Submit">
+		<input type="submit" class="btn btn-primary" value="Submit">
 	</form>
 	{% endif %}
 
@@ -168,21 +167,22 @@
 <!--End div class2-->
 
 {% endblock %}
+
 {% block scripts %}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="{% static "js/myvue.js" %}"></script>
 <script language="JavaScript" type="text/javascript" src="{% static "js/page_open.js" %}"></script>
-<script language="JavaScript" type="text/javascript" src="{% static "js/socket_script.js" %}"></script>
+<script language="JavaScript" type="text/javascript" src="{% static "js/user_from.js" %}"></script>
+<script language="JavaScript" type="text/javascript" src="{% static "js/user_to.js" %}"></script>
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <!--Reconnecting websocket-->
 <script language="JavaScript" type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.js"></script>
 <script language="JavaScript" type="text/javascript">
-	console.log(window.location)
 	var wsStart = 'ws://'
 	var endpoint = wsStart + window.location.host + window.location.pathname
-	console.log(endpoint)
 	//var socket = new WebSocket(endpoint)
 	var socket = new ReconnectingWebSocket(endpoint)
 
@@ -198,63 +198,28 @@
 	//Bring username in
 	var me = $("#myUsername").val()
 
-	//Websocket events; related to how consumer handles any event
 	//Client-side websocket received a message
 	socket.onmessage = function (e) {
-		console.log("CHECK----------------")
-		//console.log("message", e)
-		//console.log(e.data)
-		//Console log
-		//console.log(e.data)
-		//Appending chat messages
-		//chatHolder.append("<tr>" + message + "</tr>")
-
-		//Grabbing the message //---------------------------------
-		var chatDataMsg = JSON.parse(e.data) //--------------------------------- Python equivalent of "loads"
-		//chatHolder.append("<br>" + chatDataMsg.username + ": " + chatDataMsg.message)
-
-		//chatHolder.append("<br>" + chatDataMsg.username + ": " + chatDataMsg.message)
-		//<li>{{ input_message.author.username }}: {{ input_message.input }}</li>
-		//chatHolder.append("<li>" + chatDataMsg.username + ": " + chatDataMsg.message + "</li>")
+		var chatDataMsg = JSON.parse(e.data)
 		chatHolder.append("\n" + chatDataMsg.username + ": " + chatDataMsg.message)
-		//chatHolder.append("<tr>" + chatDataMsg.username + ": " + chatDataMsg.message + "</tr>")
-
 	}
 
 	//Message the client is sending
 	socket.onopen = function (e) {
-		console.log("open", e)
 
 		formData.submit(function (event) {
 			//Prevents form from being submitted by default
 			event.preventDefault()
 
-			//Send data to backend
-			//socket.send("hello world")
-
 			//Grab message data from form
 			var msg = msgIn.val()
-			//Send message text back
-			//socket.send(msg)
 
-			//Send the intial message - actual echoing
-			///////////////chatHolder.append("<br>" + me + ": " + msg)
-
-			//var formDataSerialized = formData.serialize() //Not ideal, just use the message text
-			//socket.send(formDataSerialized)
-
-			//Send a dictionary back //---------------------------------
+			//Send a dictionary back
 			var finalData = {
 				'message': msg
 			}
-			socket.send(JSON.stringify(finalData)) //Turn into JSON data in order to send,
-			//especially if it's a dictionary
+			socket.send(JSON.stringify(finalData)) //Turns into JSON data to send
 
-			//Clear the form
-			//
-			//The line below also works, but you want to use the latter in
-			//case you have other fields in your form
-			//msgIn.val('')
 			formData[0].reset()
 		})
 	}

@@ -4,19 +4,20 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<form action="/game/{{player}}/matching/" id="form" method="post">
+<!-- Bootstrap core CSS -->
+<form method="post">
 	{% csrf_token %}
 	{{create_deck_form}}
-	<input type="submit" class="success button" value="Combine Decks">
+	<br><br>
+	<input type="submit" class="btn btn-success" value="Combine Decks">
 	<a href="{% url 'main-page' %}">
-		<button type="button" class="alert button">Cancel</button>
+		<button type="button" class="btn btn-danger">Cancel</button>
 	</a>
 </form>
 {% endif %}
 
 <br>
-<h5>Currently created decks by {{ opponent.username }}:</h5>
-<br>
+<h5>Current decks by {{ opponent.username }}:</h5>
 
 <table class="tg" style="width:35%">
 	<tr>
@@ -42,26 +43,9 @@
 </table>
 </table>
 
-
-
-<!--
-{{ deck1.user_from }} {{ deck1.user_to }} {{ deck1.user_from_deck }} {{ deck1.user_to_deck }}
-<br>
-{{ deck2.user_from }} {{ deck2.user_to }} {{ deck2.user_from_deck }} {{ deck2.user_to_deck }}
-<br>
-{{ deck.deck_name }} {{ deck.card1 }}
--->
-
 {% endblock %}
 {% block scripts %}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="{% static "js/myvue.js" %}"></script>
-<script language="JavaScript" type="text/javascript" src="{% static "js/page_open.js" %}"></script>
-<script language="JavaScript" type="text/javascript" src="{% static "js/game.js" %}"></script>
-<script language="JavaScript" type="text/javascript">
-
-
-</script>
 {% endblock %}

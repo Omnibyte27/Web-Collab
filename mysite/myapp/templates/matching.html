@@ -3,24 +3,22 @@
 <html class="no-js" lang="en" dir="ltr">
 
 <head class="head">
-    <title>{{title}}</title>
+    <title>Card Matching</title>
+    <link rel="stylesheet" href="{% static "css/scrollbar.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "css/game.css" %}">
     <link rel="shortcut icon" type="image/x-icon"
         href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHI0xO_JNIJRL3cSn7wrUDuppiRcgH2IE-5IVYfaJcUVb0KxnL&s" />
 </head>
 
-<div class="details">
-    <table>
-        <tr>
-            <td>
-                Deck creator: {{ challenger.username }} (you)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Deck name: {{ deck_from.deck_name }}
-            </td>
-        </tr>
+<div class="details large card border-primary mb-3">
+    <h4 class="card text-white bg-success mb-3">Deck creator: {{ challenger.username }} (you)</h4>
+
+    <br>
+
+    <h5>Deck name: {{ deck_from.deck_name }}</h5>
+
+    <table class="table large table-hover">
         <tr>
             <td>
                 Card 1: {{deck_from.card1}}
@@ -48,53 +46,56 @@
         </tr>
     </table>
 
-    <br>
-
     <a href="{% url 'main-page' %}">
-        <button class="button">Return to Main Page</button>
+        <button class="btn btn-outline-primary">Return to Main Page</button>
     </a>
+
+    <br><br>
+
+    <div>Your Current Match Details</div>
+
+    <div id="correct">
+        Matches correct: 0
+    </div>
+
+    <div id="incorrect">
+        Matches incorrect: 0
+    </div>
+
+    <div id="results"></div>
+
+</div>
+
+<br>
+
 </div>
 
 <body class="body">
-    <div class="memory-game">
+    <div class="memory-game card border-primary mb-3">
         <!--Row 1-->
         <div class="memory-card" data-framework="user_card_1">
             <button class="front-face red" readonly>
                 <div class="text">
-                    <b>{{deck_from.card1}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_from.card1}}</b></h4>
                     <small>
-                        (card 1 from your deck)
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 1</h5>
                     </small>
                 </div>
             </button>
-            <img class="back-face" src="{% static "images/all_cards1.png" %}" />
+            <img class="back-face" src="{% static "images/cb1.png" %}" />
         </div>
         <div class="memory-card" data-framework="user_card_1">
             <button class="front-face red" readonly>
                 <div class="text">
-                    <b>{{deck_from.card1}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_from.card1}}</b></h4>
                     <small>
-                        (card 1 from your deck)
-                    </small>
-                </div>
-            </button>
-            <img class="back-face" src="{% static "images/all_cards1.png" %}" />
-        </div>
-        <div class="memory-card" data-framework="user_card_2">
-            <button class="front-face orange" readonly>
-                <div class="text">
-                    <b>{{deck_from.card2}}</b>
-                    <br>
-                    <br>
-                    <br>
-                    <small>
-                        (card 2 from your deck)
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 1</h5>
                     </small>
                 </div>
             </button>
@@ -103,12 +104,26 @@
         <div class="memory-card" data-framework="user_card_2">
             <button class="front-face orange" readonly>
                 <div class="text">
-                    <b>{{deck_from.card2}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_from.card2}}</b></h4>
                     <small>
-                        (card 2 from your deck)
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 2</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="back-face" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="memory-card" data-framework="user_card_2">
+            <button class="front-face orange" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_from.card2}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 2</h5>
                     </small>
                 </div>
             </button>
@@ -117,12 +132,12 @@
         <div class="memory-card" data-framework="user_card_3">
             <button class="front-face yellow" readonly>
                 <div class="text">
-                    <b>{{deck_from.card3}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_from.card3}}</b></h4>
                     <small>
-                        (card 3 from your deck)
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 3</h5>
                     </small>
                 </div>
             </button>
@@ -132,12 +147,12 @@
         <div class="memory-card" data-framework="user_card_3">
             <button class="front-face yellow" readonly>
                 <div class="text">
-                    <b>{{deck_from.card3}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_from.card3}}</b></h4>
                     <small>
-                        (card 3 from your deck)
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 3</h5>
                     </small>
                 </div>
             </button>
@@ -146,12 +161,12 @@
         <div class="memory-card" data-framework="user_card_4">
             <button class="front-face yellowgreen" readonly>
                 <div class="text">
-                    <b>{{deck_from.card4}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_from.card4}}</b></h4>
                     <small>
-                        (card 4 from your deck)
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 4</h5>
                     </small>
                 </div>
             </button>
@@ -160,12 +175,12 @@
         <div class="memory-card" data-framework="user_card_4">
             <button class="front-face yellowgreen" readonly>
                 <div class="text">
-                    <b>{{deck_from.card4}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_from.card4}}</b></h4>
                     <small>
-                        (card 4 from your deck)
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 4</h5>
                     </small>
                 </div>
             </button>
@@ -174,12 +189,12 @@
         <div class="memory-card" data-framework="user_card_5">
             <button class="front-face green" readonly>
                 <div class="text white">
-                    <b>{{deck_from.card5}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_from.card5}}</b></h4>
                     <small>
-                        (card 5 from your deck)
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 5</h5>
                     </small>
                 </div>
             </button>
@@ -188,12 +203,12 @@
         <div class="memory-card" data-framework="user_card_5">
             <button class="front-face green" readonly>
                 <div class="text white">
-                    <b>{{deck_from.card5}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_from.card5}}</b></h4>
                     <small>
-                        (card 5 from your deck)
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 5</h5>
                     </small>
                 </div>
             </button>
@@ -203,12 +218,12 @@
         <div class="memory-card" data-framework="opp_card_1">
             <button class="front-face elecblue" readonly>
                 <div class="text">
-                    <b>{{deck_to.card1}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_to.card1}}</b></h4>
                     <small>
-                        (card 1 from {{ opponent.username }}'s deck)
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 1</h5>
                     </small>
                 </div>
             </button>
@@ -217,12 +232,12 @@
         <div class="memory-card" data-framework="opp_card_1">
             <button class="front-face elecblue" readonly>
                 <div class="text">
-                    <b>{{deck_to.card1}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_to.card1}}</b></h4>
                     <small>
-                        (card 1 from {{ opponent.username }}'s deck)
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 1</h5>
                     </small>
                 </div>
             </button>
@@ -231,12 +246,12 @@
         <div class="memory-card" data-framework="opp_card_2">
             <button class="front-face lightblue" readonly>
                 <div class="text">
-                    <b>{{deck_to.card2}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_to.card2}}</b></h4>
                     <small>
-                        (card 2 from {{ opponent.username }}'s deck)
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 2</h5>
                     </small>
                 </div>
             </button>
@@ -245,12 +260,12 @@
         <div class="memory-card" data-framework="opp_card_2">
             <button class="front-face lightblue" readonly>
                 <div class="text">
-                    <b>{{deck_to.card2}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_to.card2}}</b></h4>
                     <small>
-                        (card 2 from {{ opponent.username }}'s deck)
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 2</h5>
                     </small>
                 </div>
             </button>
@@ -259,12 +274,12 @@
         <div class="memory-card" data-framework="opp_card_3">
             <button class="front-face oceanblue" readonly>
                 <div class="text">
-                    <b>{{deck_to.card3}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_to.card3}}</b></h4>
                     <small>
-                        (card 3 from {{ opponent.username }}'s deck)
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 3</h5>
                     </small>
                 </div>
             </button>
@@ -274,12 +289,12 @@
         <div class="memory-card" data-framework="opp_card_3">
             <button class="front-face oceanblue" readonly>
                 <div class="text">
-                    <b>{{deck_to.card3}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_to.card3}}</b></h4>
                     <small>
-                        (card 3 from {{ opponent.username }}'s deck)
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 3</h5>
                     </small>
                 </div>
             </button>
@@ -288,12 +303,12 @@
         <div class="memory-card" data-framework="opp_card_4">
             <button class="front-face purple" readonly>
                 <div class="text">
-                    <b>{{deck_to.card4}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_to.card4}}</b></h4>
                     <small>
-                        (card 4 from {{ opponent.username }}'s deck)
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 4</h5>
                     </small>
                 </div>
             </button>
@@ -302,12 +317,12 @@
         <div class="memory-card" data-framework="opp_card_4">
             <button class="front-face purple" readonly>
                 <div class="text">
-                    <b>{{deck_to.card4}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_to.card4}}</b></h4>
                     <small>
-                        (card 4 from {{ opponent.username }}'s deck)
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 4</h5>
                     </small>
                 </div>
             </button>
@@ -316,12 +331,12 @@
         <div class="memory-card" data-framework="opp_card_5">
             <button class="front-face rose" readonly>
                 <div class="text white">
-                    <b>{{deck_to.card5}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_to.card5}}</b></h4>
                     <small>
-                        (card 5 from {{ opponent.username }}'s deck)
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 5</h5>
                     </small>
                 </div>
             </button>
@@ -330,12 +345,12 @@
         <div class="memory-card" data-framework="opp_card_5">
             <button class="front-face rose" readonly>
                 <div class="text white">
-                    <b>{{deck_to.card5}}</b>
                     <br>
-                    <br>
-                    <br>
+                    <h4><b>{{deck_to.card5}}</b></h4>
                     <small>
-                        (card 5 from {{ opponent.username }}'s deck)
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 5</h5>
                     </small>
                 </div>
             </button>
@@ -343,18 +358,14 @@
         </div>
     </div>
 
-    <div class="details">
-        <table>
-            <tr>
-                <td>
-                    Deck creator: {{ opponent.username }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Deck name: {{ deck_to.deck_name }}
-                </td>
-            </tr>
+    <div class="details card border-primary mb-3">
+        <h4 class="card text-white bg-info mb-3">Deck creator: {{ opponent.username }}</h4>
+
+        <br>
+
+        <h5>Deck name: {{ deck_to.deck_name }}</h5>
+
+        <table class="table table-hover">
             <tr>
                 <td>
                     Card 1: {{deck_to.card1}}
@@ -382,10 +393,8 @@
             </tr>
         </table>
 
-        <br>
-
         <a href="/game/{{ opponent.username }}/matching/">
-            <button class="button">Replay Player</button>
+            <button class="btn btn-outline-primary">Reset Board</button>
         </a>
     </div>
 

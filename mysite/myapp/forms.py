@@ -2,7 +2,6 @@ from django import forms
 from django.core.validators import validate_slug
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
 from django.forms import ModelChoiceField
 from django.forms import ModelForm
 from myapp.models import Deck

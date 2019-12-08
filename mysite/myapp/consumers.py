@@ -3,10 +3,6 @@ import json
 from django.contrib.auth import get_user_model
 from channels.consumer import AsyncConsumer
 from channels.db import database_sync_to_async
-
-#import game_handler
-#from .models import Thread, Chat Message
-
 from .models import Input
 
 class ChatConsumer(AsyncConsumer):
@@ -80,6 +76,9 @@ class ChatConsumer(AsyncConsumer):
     async def websocket_disconnect(self, event):
         #When the websocket disconnects
         print("Disconnected", event)
+
+        #raise channels.exceptions.StopConsumer()
+    
         await self.send({
             ##Closing the socket connection from the backend
             "type":"websocket.close"

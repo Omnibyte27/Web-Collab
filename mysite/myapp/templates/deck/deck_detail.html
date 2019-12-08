@@ -3,9 +3,6 @@
 
 {% block content %}
 <h2>Deck Details</h2>
-{{object.deck_name}}, {{object.card1.card_name}}, {{object.card2.card_name}}, {{object.card3.card_name}},
-{{object.card4.card_name}}, {{object.card5.card_name}}
-
 <table class="tg" style="width:35%">
 	<tr>
 		<th class="tg-rpls">Deck Name</th>
@@ -20,8 +17,8 @@
 		<!--Deck name and contents-->
 		<td class="tg-0lax">
 			<h5>{{object.deck_name}}</h5>
-			<u><a class="deck-title" href="{% url 'deck-update' object.deck_name %}">Edit</a></u>
-			<u><a class="deck-title" href="{% url 'deck-delete' object.deck_name %}">Delete</a></u>
+			<u><a class="badge badge-primary" href="{% url 'deck-update' object.deck_name %}">Edit</a></u>
+			<u><a class="badge badge-danger" href="{% url 'deck-delete' object.deck_name %}">Delete</a></u>
 		</td>
 		<td>{{object.card1.card_name}}</td>
 		<td>{{object.card2.card_name}}</td>
@@ -31,9 +28,8 @@
 	</tr>
 </table>
 
-<br>
 <a href="{% url 'deck-page' %}">
-	<button class="button button1">Return to Decks</button>
+	<button class="btn btn-success">Return to Decks</button>
 </a>
 
 {% endblock %}
@@ -41,6 +37,4 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="{% static "js/myvue.js" %}"></script>
-<script language="JavaScript" type="text/javascript" src="{% static "js/page_open.js" %}"></script>
 {% endblock %}

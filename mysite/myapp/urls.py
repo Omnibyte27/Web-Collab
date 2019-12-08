@@ -12,6 +12,9 @@ urlpatterns = [
     path('', views.index, name='main-page'),
     path('players/', views.players_view),
     path('inputs/', views.inputs_view),
+    #Deck Combination
+    path('user_from/', views.from_view),
+    path('user_to/', views.to_view),
     #Game
     re_path(r'^game/(?P<player>\w+)/$', views.player_view, name='p_view'),
     re_path(r'^game/(?P<player>\w+)/matching/$', views.matching_view, name='g_view'),

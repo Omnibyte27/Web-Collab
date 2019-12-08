@@ -9,9 +9,9 @@
 		{{ form }}
 	</fieldset>
 	<div class="form-group">
-		<button class="button button1" type="submit">Confirm</button>
+		<button class="btn btn-success" type="submit">Confirm</button>
 		<a href="{% url 'deck-page' %}">
-			<button type="button" class="alert button">Cancel</button>
+			<button type="button" class="btn btn-danger">Cancel</button>
 		</a>
 	</div>
 </form>
@@ -21,6 +21,4 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="{% static "js/myvue.js" %}"></script>
-<script src="{% static "js/page_open.js" %}"></script>
 {% endblock %}
