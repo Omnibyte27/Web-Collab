@@ -1,0 +1,77 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Matching</title>
+  <link rel="stylesheet" href="{% static "css/foundation.css" %}">
+  <link rel="stylesheet" href="{% static "css/app.css" %}">
+  <link rel="stylesheet" href="{% static "css/scrollbar.css" %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHI0xO_JNIJRL3cSn7wrUDuppiRcgH2IE-5IVYfaJcUVb0KxnL&s" />
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  {% block css %}
+  {% endblock %}
+</head>
+
+<body>
+  <!--Navigation-->
+
+  <div>
+    <center>
+      <h1 class="text-white bg-primary mb-3">
+        <br>
+        <b>Card Matching</b>
+        <br>
+        <small></small>
+        <br>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          {% if user.is_authenticated %}
+          <h5>
+            <div class="navbar-brand">Navigation</div>
+          </h5>
+          {% endif %}
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+              {% if user.is_authenticated %}
+              <li class="nav-item active">
+                <h6><a class="nav-link" href="{% url 'main-page' %}">Home <span class="sr-only">(current)</span></a>
+                </h6>
+              </li>
+              <li class="nav-item">
+                <h6><a class="nav-link" href="{% url 'deck-page' %}">Decks</a></h6>
+              </li>
+              <li class="nav-item">
+                <h6><a class="nav-link" href="/logout/">Logout</a></h6>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+      </h1>
+    </center>
+  </div>
+
+  {% block content %}
+  {% endblock %}
+  <script src="{% static "js/vendor/jquery.js" %}"></script>
+  <script src="{% static "js/vendor/what-input.js" %}"></script>
+  <script src="{% static "js/vendor/foundation.js" %}"></script>
+  <script src="{% static "js/app.js" %}"></script>
+  {% block scripts %}
+  {% endblock %}
+</body>
+
+</html>

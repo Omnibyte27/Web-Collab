@@ -1,0 +1,169 @@
+body {
+    height: 100vh;
+    display: flex;
+    background: white;
+    position: relative;
+}
+
+.pop_up {
+    background: white;
+    border: 6px black solid;
+    border-color: darkgrey;
+    padding: 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+    margin: 0px auto;
+    width: 330px;
+    height: 17vh;
+    float: left;
+    top: 70vh;
+    position: absolute;
+}
+
+.hidden {
+    display:none;
+}
+
+.details {
+    background: white;
+    width: 300px;
+    height: 55vh;
+    display: inline-block;
+    overflow: auto;
+    white-space: nowrap;
+    margin: 0px auto;
+    border: 6px black solid;
+    border-color: darkgrey;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+button:focus {
+    outline: 0;
+}
+
+.details.large {
+    width: 300px;
+    height: 550px;
+}
+
+.text {
+    /*------------------------------------------- Regular text*/
+    font-size: 20px;
+    word-wrap: break-word;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+}
+
+.text.white {
+    /*------------------------------------------- White text*/
+    color: white;
+}
+
+.game_grid {
+    background: rgb(30, 34, 37);
+    padding: 25px;
+    border-radius: 25px;
+    width: 700px;
+    height: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
+
+.card_box {
+    width: calc(20% - 10px);
+    height: calc(25% - 10px);
+    margin: 5px;
+    position: relative;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+}
+
+.card_box.rotate {
+    transform: rotateY(180deg);
+}
+
+.card_front {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    word-wrap: break-word;
+    border: 2px solid white;
+    position: absolute;
+    border-radius: 25px;
+
+}
+
+/* Card Colors */
+.card_front.red {
+    /*------------------------------------------- Match 1*/
+    background-color: rgb(255, 87, 87);
+}
+
+.card_front.orange {
+    /*------------------------------------------- Match 2*/
+    background-color: orange;
+}
+
+.card_front.yellow {
+    /*------------------------------------------- Match 3*/
+    background-color: yellow;
+}
+
+.card_front.yellowgreen {
+    /*------------------------------------------- Match 4*/
+    background-color: yellowgreen;
+}
+
+.card_front.green {
+    /*------------------------------------------- Match 5*/
+    background-color: rgb(77, 177, 77);
+}
+
+.card_front.lightblue {
+    /*------------------------------------------- Match 6*/
+    background-color: lightblue;
+}
+
+.card_front.elecblue {
+    /*------------------------------------------- Match 7*/
+    background-color: #33FFBD;
+}
+
+.card_front.oceanblue {
+    /*------------------------------------------- Match 8*/
+    background-color: #34D8EB;
+}
+
+.card_front.purple {
+    /*------------------------------------------- Match 9*/
+    background-color: rgb(179, 153, 209);
+}
+
+.card_front.rose {
+    /*------------------------------------------- Match 10*/
+    background-color: rgb(187, 82, 156);
+}
+
+.card_back {
+    background-color: darkgrey;
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    border: 2px solid white;
+    position: absolute;
+    border-radius: 25px;
+    backface-visibility: hidden;
+}
+
+.card_back:hover {
+    transform: scale(1.05);
+}
+
+.button_dimensions {
+    width: 100;
+    height: 10;
+}

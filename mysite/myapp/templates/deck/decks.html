@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<ul class="accordion" data-accordion>
+	<li class="accordion-item" data-accordion-item>
+		<a href="#" class="accordion-title" style="text-decoration:none">
+			<button class="btn btn-secondary btn-lg btn-block">
+				<center>
+					<h6>Profile Details</h6>
+				</center>
+			</button>
+		</a>
+		<div class="accordion-content" data-tab-content>
+			<table class="table large table-hover" style="width:40%">
+				<tr>
+					<td>
+						<b>Username:</b> {{ user_data.username }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Email:</b> {{ user_data.email }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Last login:</b> {{ user_data.last_login }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Date joined:</b> {{ user_data.date_joined }}
+					</td>
+				</tr>
+			</table>
+		</div>
+	</li>
+	<li class="accordion-item is-active" data-accordion-item>
+		<!-- Accordion tab title -->
+		<a href="#" class="accordion-title" style="text-decoration:none">
+			<button class="btn btn-secondary btn-lg btn-block">
+				<center>
+					<h6>Deck Management</h6>
+				</center>
+			</button>
+		</a>
+
+		<!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
+		<div class="accordion-content" data-tab-content>
+			<div class="tab">
+				<button class="tablinks" onclick="openTab(event, 'View_Decks')" id="defaultOpen" style="outline:0;">View
+					Decks</button>
+				<button class="tablinks" onclick="openTab(event, 'Create_Deck')" style="outline:0;">Create Deck</button>
+				<button class="tablinks" onclick="openTab(event, 'Card Catalog')" style="outline:0;">Card
+					Catalog</button>
+			</div>
+
+			<div id="View_Decks" class="tabcontent">
+				<p>Currently created decks:</p>
+
+				<table class="tg" style="width:35%">
+					<tr>
+						<th class="tg-rpls">Deck Name</th>
+						<th class="tg-rpls">Card 1</th>
+						<th class="tg-rpls">Card 2</th>
+						<th class="tg-rpls">Card 3</th>
+						<th class="tg-rpls">Card 4</th>
+						<th class="tg-rpls">Card 5</th>
+					</tr>
+					<!--TEMPLATE-->
+					{% for deck_content in deck_list %}
+					<tr>
+						<!--Deck name and contents-->
+						<td class="tg-0lax">
+							<center>
+								<h5><a class="deck-title card border-secondary mb-3"
+										href="{% url 'deck-detail' deck_content.deck_name %}">{{deck_content.deck_name}}</a>
+								</h5>
+							</center>
+							<!--Deck operations Edit/Delete-->
+							<a class="deck-title" href="{% url 'deck-update' deck_content.deck_name %}"><span
+									class="badge badge-primary">Edit</span></a>
+							<a class="deck-title" href="{% url 'deck-delete' deck_content.deck_name %}"><span
+									class="badge badge-danger">Delete</span></a>
+
+						</td>
+						<td>{{deck_content.card1.card_name}}</td>
+						<td>{{deck_content.card2.card_name}}</td>
+						<td>{{deck_content.card3.card_name}}</td>
+						<td>{{deck_content.card4.card_name}}</td>
+						<td>{{deck_content.card5.card_name}}</td>
+					</tr>
+					{% endfor %}
+				</table>
+
+			</div>
+
+			<div id="Create_Deck" class="tabcontent">
+				<p>Create decks here.</p>
+				<form action="{% url 'deck-page' %}" method="post">
+					{% csrf_token %}
+					{{ create_deck_form }}
+					<br><br>
+					<input type="submit" class="btn btn-success" value="Submit">
+					<a class="btn btn-danger" href="{% url 'deck-page' %}">Cancel</a>
+				</form>
+			</div>
+
+			<div id="Card Catalog" class="tabcontent">
+				<p>View all cards here.</p>
+
+				<table class="tg" style="width:35%">
+					<tr>
+						<th class="tg-rpls">Card Name</th>
+						<th class="tg-rpls">Top Value</th>
+						<th class="tg-rpls">Left Value</th>
+						<th class="tg-rpls">Right Value</th>
+						<th class="tg-rpls">Bottom Value</th>
+					</tr>
+					<!--Card catalog details-->
+					{% for card in catalog %}
+					<tr>
+						<td>
+							<h5>{{card.card_name}}</h5>
+						</td>
+						<td>{{card.top_value}}</td>
+						<td>{{card.left_value}}</td>
+						<td>{{card.right_value}}</td>
+						<td>{{card.bottom_value}}</td>
+					</tr>
+					{% endfor %}
+				</table>
+
+			</div>
+		</div>
+	</li>
+</ul>
+
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="{% static "js/page_open.js" %}"></script>
+{% endblock %}

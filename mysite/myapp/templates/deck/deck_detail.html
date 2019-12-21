@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Deck Details</h2>
+<table class="tg" style="width:35%">
+	<tr>
+		<th class="tg-rpls">Deck Name</th>
+		<th class="tg-rpls">Card 1</th>
+		<th class="tg-rpls">Card 2</th>
+		<th class="tg-rpls">Card 3</th>
+		<th class="tg-rpls">Card 4</th>
+		<th class="tg-rpls">Card 5</th>
+	</tr>
+	<!--TEMPLATE-->
+	<tr>
+		<!--Deck name and contents-->
+		<td class="tg-0lax">
+			<h5>{{object.deck_name}}</h5>
+			<u><a class="badge badge-primary" href="{% url 'deck-update' object.deck_name %}">Edit</a></u>
+			<u><a class="badge badge-danger" href="{% url 'deck-delete' object.deck_name %}">Delete</a></u>
+		</td>
+		<td>{{object.card1.card_name}}</td>
+		<td>{{object.card2.card_name}}</td>
+		<td>{{object.card3.card_name}}</td>
+		<td>{{object.card4.card_name}}</td>
+		<td>{{object.card5.card_name}}</td>
+	</tr>
+</table>
+
+<a href="{% url 'deck-page' %}">
+	<button class="btn btn-success">Return to Decks</button>
+</a>
+
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+{% endblock %}

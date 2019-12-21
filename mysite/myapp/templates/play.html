@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<!-- Bootstrap core CSS -->
+<form method="post">
+	{% csrf_token %}
+	{{create_deck_form}}
+	<br><br>
+	<input type="submit" class="btn btn-success" value="Combine Decks">
+	<a href="{% url 'main-page' %}">
+		<button type="button" class="btn btn-danger">Cancel</button>
+	</a>
+</form>
+{% endif %}
+
+<br>
+<h5>Current decks by {{ opponent.username }}:</h5>
+
+<table class="tg" style="width:35%">
+	<tr>
+		<th class="tg-rpls">Deck Name</th>
+		<th class="tg-rpls">Card 1</th>
+		<th class="tg-rpls">Card 2</th>
+		<th class="tg-rpls">Card 3</th>
+		<th class="tg-rpls">Card 4</th>
+		<th class="tg-rpls">Card 5</th>
+	</tr>
+	<!--TEMPLATE-->
+	{% for deck_content in deck_list %}
+	<tr>
+		<!--Deck name and contents-->
+		<td>{{deck_content.deck_name}}</td>
+		<td>{{deck_content.card1.card_name}}</td>
+		<td>{{deck_content.card2.card_name}}</td>
+		<td>{{deck_content.card3.card_name}}</td>
+		<td>{{deck_content.card4.card_name}}</td>
+		<td>{{deck_content.card5.card_name}}</td>
+	</tr>
+	{% endfor %}
+</table>
+</table>
+
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+{% endblock %}

@@ -1,0 +1,415 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head class="head">
+    <title>Card Matching</title>
+    <link rel="stylesheet" href="{% static "css/scrollbar.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/game.css" %}">
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHI0xO_JNIJRL3cSn7wrUDuppiRcgH2IE-5IVYfaJcUVb0KxnL&s" />
+</head>
+
+<div class="details card border-primary mb-3">
+    <h4 class="card text-white bg-success mb-3">Deck creator: {{ challenger.username }} (you)</h4>
+
+    <br>
+
+    <h5>Deck name: {{ deck_from.deck_name }}</h5>
+
+    <table class="table large table-hover">
+        <tr>
+            <td>
+                Card 1: {{deck_from.card1}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Card 2: {{deck_from.card2}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Card 3: {{deck_from.card3}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Card 4: {{deck_from.card4}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Card 5: {{deck_from.card5}}
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<br>
+
+</div>
+
+<body class="body">
+    <div class="pop_up">
+        <div class="in_play" id="play">
+            <center>
+                <div class="card text-white bg-secondary mb-3">Your Current Match Details</div>
+            </center>
+
+            <div id="correct">
+                Matches correct: 0
+            </div>
+
+            <div id="incorrect">
+                Matches incorrect: 0
+            </div>
+        </div>
+
+        <div class="complete hidden" id="finished">
+            <div id="results"></div>
+
+            <br>
+
+            <div>
+                <a href="{% url 'main-page' %}" style="text-decoration : none;">
+                    <button class="btn btn-success">Return to Main Page</button>
+                </a>
+                
+                <a href="/game/{{ opponent.username }}/matching/" style="text-decoration : none;">
+                    <button class="btn btn-primary">Reset Board</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="game_grid card border-primary mb-3">
+        <!--Row 1-->
+        <div class="card_box" data-card="user_card_1">
+            <button class="card_front red" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_from.card1}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 1</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="user_card_1">
+            <button class="card_front red" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_from.card1}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 1</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="user_card_2">
+            <button class="card_front orange" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_from.card2}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 2</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="user_card_2">
+            <button class="card_front orange" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_from.card2}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 2</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="user_card_3">
+            <button class="card_front yellow" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_from.card3}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 3</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <!--Row 2-->
+        <div class="card_box" data-card="user_card_3">
+            <button class="card_front yellow" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_from.card3}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 3</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="user_card_4">
+            <button class="card_front yellowgreen" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_from.card4}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 4</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="user_card_4">
+            <button class="card_front yellowgreen" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_from.card4}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 4</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="user_card_5">
+            <button class="card_front green" readonly>
+                <div class="text white">
+                    <br>
+                    <h4><b>{{deck_from.card5}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 5</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="user_card_5">
+            <button class="card_front green" readonly>
+                <div class="text white">
+                    <br>
+                    <h4><b>{{deck_from.card5}}</b></h4>
+                    <small>
+                        <span class="badge badge-success">Your deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 5</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <!--Row 3-->
+        <div class="card_box" data-card="opp_card_1">
+            <button class="card_front elecblue" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_to.card1}}</b></h4>
+                    <small>
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 1</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="opp_card_1">
+            <button class="card_front elecblue" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_to.card1}}</b></h4>
+                    <small>
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 1</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="opp_card_2">
+            <button class="card_front lightblue" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_to.card2}}</b></h4>
+                    <small>
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 2</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="opp_card_2">
+            <button class="card_front lightblue" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_to.card2}}</b></h4>
+                    <small>
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 2</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="opp_card_3">
+            <button class="card_front oceanblue" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_to.card3}}</b></h4>
+                    <small>
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 3</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <!--Row 4-->
+        <div class="card_box" data-card="opp_card_3">
+            <button class="card_front oceanblue" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_to.card3}}</b></h4>
+                    <small>
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 3</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="opp_card_4">
+            <button class="card_front purple" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_to.card4}}</b></h4>
+                    <small>
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 4</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="opp_card_4">
+            <button class="card_front purple" readonly>
+                <div class="text">
+                    <br>
+                    <h4><b>{{deck_to.card4}}</b></h4>
+                    <small>
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 4</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="opp_card_5">
+            <button class="card_front rose" readonly>
+                <div class="text white">
+                    <br>
+                    <h4><b>{{deck_to.card5}}</b></h4>
+                    <small>
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 5</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+        <div class="card_box" data-card="opp_card_5">
+            <button class="card_front rose" readonly>
+                <div class="text white">
+                    <br>
+                    <h4><b>{{deck_to.card5}}</b></h4>
+                    <small>
+                        <span class="badge badge-info">Opponent's deck:</span>
+                        <br>
+                        <h5 class="badge badge-pill badge-dark">card 5</h5>
+                    </small>
+                </div>
+            </button>
+            <img class="card_back" src="{% static "images/cb1.png" %}" />
+        </div>
+    </div>
+
+    <div class="details card border-primary mb-3">
+        <h4 class="card text-white bg-info mb-3">Deck creator: {{ opponent.username }}</h4>
+
+        <br>
+
+        <h5>Deck name: {{ deck_to.deck_name }}</h5>
+
+        <table class="table table-hover">
+            <tr>
+                <td>
+                    Card 1: {{deck_to.card1}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Card 2: {{deck_to.card2}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Card 3: {{deck_to.card3}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Card 4: {{deck_to.card4}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Card 5: {{deck_to.card5}}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script language="JavaScript" type="text/javascript" src="{% static "js/cards.js" %}"></script>
+
+</body>
+
+</html>
